@@ -13,6 +13,8 @@ var _a;
 (_a = document.querySelector("#jokeButton")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", getJoke);
 // Declare & initiate const jokeApiUrl to store the api url
 const jokeApiUrl = "https://icanhazdadjoke.com/";
+//Reach the HTML element where the result of the response will be output
+let HTMLResponse = document.querySelector("#output");
 //Declare async function getJoke() and type it as Promise<JokeResponse>
 function getJoke() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -33,6 +35,8 @@ function getJoke() {
             respData = data;
             // Declare the const response to store the result of getJoke(). Assign data.joke to it
             const response = data.joke;
+            //Assign data.joke to HTMLResponse!.innerHTML as a string. Use ! on HTMLResponse to avoid errors with it being possibly null
+            HTMLResponse.innerHTML = `${data.joke}`;
             //log the result of response
             console.log(response);
             //return the data to avoid errors with the type
