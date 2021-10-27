@@ -14,33 +14,42 @@ interface ReportAcudits {
 // Acces the jokeButton & adds an event listener to it to execute the getJoke()
 document.querySelector("#jokeButton")?.addEventListener("click", getJoke);
 
+//Store the valoration buttons acces in valorationButton1, 2, 3 variables
 const valorationButton1: HTMLButtonElement | null = document.querySelector('#button1');
 const valorationButton2: HTMLButtonElement | null = document.querySelector('#button2');
 const valorationButton3: HTMLButtonElement | null = document.querySelector('#button3');
 
+//Store the valoration text acces in valorationText variable
 const valorationText = document.querySelector('.valorationText');
 
 // Declare & initiate const jokeApiUrl to store the api url
 const jokeApiUrl: string = "https://icanhazdadjoke.com/";
 //Reach the HTML element where the result of the response will be output
 let HTMLResponse: HTMLElement | null = document.querySelector("#output");
-
+//Declare const reportAcudits as an array of objects following the interface ReportAcudits
 const reportAcudits: Array<ReportAcudits> = []
 
+//Declare the function _reportAcudits, wich will be activated by the onclick event on the HTML buttons & will recive the _score on activation
 const _reportAcudits = (_score: number): Array<ReportAcudits> => {
-    let joke = document.querySelector("#output")?.textContent;
-    let score = _score;
-    let todaysDate = new Date()
-    let date = todaysDate.toISOString();
+    //Declare and initiate the variables joke, score, todaysDate & date
+    const joke = document.querySelector("#output")?.textContent;
+    const score = _score;
+    //create new Date() and assign it to todaysDate
+    const todaysDate = new Date()
+    //Transform todaysDate in ISO format & assign it to date
+    const date = todaysDate.toISOString();
 
+    //Use the stored variables as param and push them to reportAcudits
     reportAcudits.push({joke, score, date});
 
+    //On valoration add .d-none bootstrap class to the valoration text and buttons, so the undisplay
     valorationText?.classList.add('d-none');
 
     valorationButton1?.classList.add('d-none');
     valorationButton2?.classList.add('d-none');
     valorationButton3?.classList.add('d-none');
 
+    //Log the actualized reportAcudits string
     console.log(reportAcudits);
 
     return reportAcudits;
@@ -68,8 +77,8 @@ async function getJoke(): Promise<JokeResponse>{
             //Assign data.joke to HTMLResponse!.innerHTML as a string. Use ! on HTMLResponse to avoid errors with it being possibly null
             HTMLResponse!.innerHTML = `${data.joke}`;
 
+            //Removes the .d-none bootstrap class from the buttons, making them display again
             valorationText?.classList.remove('d-none');
-//Ver xk solo remueve la clase del primer elemento
             valorationButton1?.classList.remove('d-none');
             valorationButton2?.classList.remove('d-none');
             valorationButton3?.classList.remove('d-none');
