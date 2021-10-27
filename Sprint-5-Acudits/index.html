@@ -16,6 +16,12 @@
             <div class="d-grid gap-4">
                 <h1 class="text-center">JOKES API</h1>
                 <p id="output"></p>
+                <p class="valorationText text-center d-none">Valora de 1 a 3 quant t'ha agradat l'acudit</p>
+                <div class="d-flex justify-content-evenly">
+                    <button id="button1" class="btn btn-secondary valorationButton d-none" onclick="_reportAcudits(1)">1</button>
+                    <button id="button2" class="btn btn-secondary valorationButton d-none" onclick="_reportAcudits(2)">2</button>
+                    <button id="button3" class="btn btn-secondary valorationButton d-none" onclick="_reportAcudits(3)">3</button>
+                </div>
                 <button id="jokeButton" class="btn btn-primary mx-auto">Següent acudit</button>
     
             </div>
