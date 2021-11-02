@@ -26,6 +26,8 @@ const reportAcudits = [];
 const locationCP = [];
 // Declare & initiate const jokeApiUrl to store the api url
 const jokeApiUrl = "https://icanhazdadjoke.com/";
+// Declare & initiate const chuckNorrisJokeApiUrl to store the api url
+const chuckNorrisJokeApiUrl = "https://api.chucknorris.io/jokes/random";
 //Declare & initiate const locationUrl to store the api url
 const locationUrl = "https://ipgeolocation.abstractapi.com/v1/?api_key=898f29b2e1834fc68b8c2deb60e498ff&ip_address=&fields=postal_code,city";
 // const weatherApiUrl = "https://www.el-tiempo.net/api/json/v2/provincias/08/municipios/"
@@ -53,7 +55,7 @@ const _reportAcudits = (_score) => {
     return reportAcudits;
 };
 //Declare async function getJoke() and type it as Promise<JokeResponse>
-function getJoke() {
+function getDadJoke() {
     return __awaiter(this, void 0, void 0, function* () {
         //Declare & initiate let respData so we can return it at the end of the function to avoid errors betwen the type of the function and the value returned
         let respData = {
@@ -74,6 +76,45 @@ function getJoke() {
             const response = data.joke;
             //Assign data.joke to HTMLResponse!.innerHTML as a string. Use ! on HTMLResponse to avoid errors with it being possibly null
             HTMLResponse.innerHTML = `${data.joke}`;
+            //Removes the .d-none bootstrap class from the buttons, making them display again
+            valorationText === null || valorationText === void 0 ? void 0 : valorationText.classList.remove('d-none');
+            valorationButton1 === null || valorationButton1 === void 0 ? void 0 : valorationButton1.classList.remove('d-none');
+            valorationButton2 === null || valorationButton2 === void 0 ? void 0 : valorationButton2.classList.remove('d-none');
+            valorationButton3 === null || valorationButton3 === void 0 ? void 0 : valorationButton3.classList.remove('d-none');
+            //log the result of response
+            console.log(response);
+            //return the data to avoid errors with the type
+            return data;
+        });
+        //return the respData to avoid errors with the type
+        return respData;
+    });
+}
+//Declare async function getJoke() and type it as Promise<JokeResponse>
+function getChuckNorrisJoke() {
+    return __awaiter(this, void 0, void 0, function* () {
+        //Declare & initiate let respData so we can return it at the end of the function to avoid errors betwen the type of the function and the value returned
+        let respData = {
+            categories: [],
+            created_at: "string",
+            icon_url: "string",
+            id: "string",
+            updated_at: "string",
+            url: "string",
+            value: "string"
+        };
+        //fetch to the API. Use the jokeApiUrl to get the url. Apply the GET method & the headers to acces the API data
+        yield fetch(chuckNorrisJokeApiUrl, {
+            method: "GET",
+        })
+            //Transform the string response to json format, so it becomes readable
+            .then((resp) => resp.json())
+            .then((data) => {
+            respData = data;
+            // Declare the const response to store the result of getChuckNorrisJoke(). Assign data.joke to it
+            const response = data.value;
+            //Assign data.joke to HTMLResponse!.innerHTML as a string. Use ! on HTMLResponse to avoid errors with it being possibly null
+            HTMLResponse.innerHTML = `${data.value}`;
             //Removes the .d-none bootstrap class from the buttons, making them display again
             valorationText === null || valorationText === void 0 ? void 0 : valorationText.classList.remove('d-none');
             valorationButton1 === null || valorationButton1 === void 0 ? void 0 : valorationButton1.classList.remove('d-none');
@@ -125,3 +166,16 @@ function getLocation() {
 }
 //Call the function to execute it on init
 getLocation();
+function getJoke() {
+    const random = Math.random();
+    if (random <= 0.5) {
+        getDadJoke();
+        console.log(random);
+        return "dadJoke";
+    }
+    else {
+        getChuckNorrisJoke();
+        console.log(random);
+        return "chuckNorrisJoke";
+    }
+}
