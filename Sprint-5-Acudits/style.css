@@ -1,0 +1,22 @@
+body{
+    /* padding: 20px; */
+    background-color: white
+}
+.container{
+    max-height: 500px;
+}
+.joke-container {
+    background-image: url(/blob.svg);
+    background-size: cover;
+    background-position: 50% 50%;
+    max-height: 200px;
+}
+#output{
+    max-width: fit-content;
+}
+svg{
+    width: 100%;
+    height: auto;
+    padding: 0;
+    max-width: fit-content;
+}
