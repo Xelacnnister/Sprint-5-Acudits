@@ -2,14 +2,59 @@ body{
     /* padding: 20px; */
     background-color: white
 }
+#icon {
+ filter: drop-shadow(2px 1px 1px black)
+}
+#weather {
+    font-size: 30px;
+}
+#temperature {
+    font-size: medium;
+    font-weight: bold;
+}
+
+.container{
+    height: 80vh;
+    width: 80vw;
+}
 .joke-container {
-    background-image: url(./blob.svg);
+    background-image: url(./assets/svg.svg);
     background-size: 100% 100%;
     /* background-position: 50% 50%; */
-    /* max-height: 200px;
-    max-width: 800px; */
-
+    max-width: 700px; 
+    height: 600px;
 }
 #output{
     max-width: fit-content;
+}
+
+h1, #output, .valorationText{
+    color: white;
+    text-shadow: 2px 1px black;
+}
+.fa-frown, .fa-meh, .fa-smile-beam{
+    color: black;
+    filter:drop-shadow(2px 1px 1px #EDC951);
+    z-index: 10;
+}
+.fa-circle{
+    color: #EDC951;
+    filter:drop-shadow(2px 1px 1px #EDC951);
+    z-index: 5;
+}
+#jokeButton {
+    border: 2px solid black;
+    border-radius: 30px;
+    font-weight: bold;
+    box-shadow: 3px 3px 2px #EDC951;
+    background-color: #EDC951;
+}
+
+@media (min-width: 768px){
+    .joke-container {
+  
+        height: 800px;
+    
+    }
+    
 }

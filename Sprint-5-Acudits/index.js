@@ -24,6 +24,8 @@ let HTMLResponse = document.querySelector("#output");
 const reportAcudits = [];
 //Declare locationCP to store and acces later the Users city & postal code
 const locationCP = [];
+let iconCode;
+let iconResult;
 // Declare & initiate const jokeApiUrl to store the api url
 const jokeApiUrl = "https://icanhazdadjoke.com/";
 // Declare & initiate const chuckNorrisJokeApiUrl to store the api url
@@ -150,12 +152,18 @@ function getLocation() {
                     })
                         .then((resp) => resp.json())
                         .then((data) => {
-                        document.getElementById("weather").innerHTML = `${data.weather[0].main} | ${data.main.temp}º`;
+                        //ICON
+                        iconCode = data.weather[0].icon;
+                        console.log(iconCode);
+                        const icon = document.getElementById('icon');
+                        icon.setAttribute('src', `http://openweathermap.org/img/wn/${iconCode}.png`);
+                        document.getElementById("temperature").innerHTML = `${data.main.temp}º`;
                         console.log(document.getElementById("weather").innerHTML);
                     });
                     return document.getElementById("weather").innerHTML;
                 });
             }
+            // https://openweathermap.org/weather-conditions MIRAR PARA LOS ICONOS   
             getWeather();
             //return the data to avoid errors with the type
             return data;

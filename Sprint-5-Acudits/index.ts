@@ -46,6 +46,10 @@ const reportAcudits: Array<ReportAcudits> = []
 //Declare locationCP to store and acces later the Users city & postal code
 const locationCP: Array<string> = []
 
+let iconCode: string;
+let iconResult: string | PromiseLike<string>
+
+
 // Declare & initiate const jokeApiUrl to store the api url
 const jokeApiUrl: string = "https://icanhazdadjoke.com/";
 // Declare & initiate const chuckNorrisJokeApiUrl to store the api url
@@ -181,13 +185,20 @@ async function getLocation(): Promise<string[]> {
             })
             .then((resp) => resp.json())
             .then((data) => {
-                document.getElementById("weather")!.innerHTML = `${data.weather[0].main} | ${data.main.temp}º`;
+                //ICON
+                iconCode = data.weather[0].icon;
+                console.log(iconCode);
+                
+                const icon = document.getElementById('icon');
+                icon!.setAttribute('src', `http://openweathermap.org/img/wn/${iconCode}.png`);
+                document.getElementById("temperature")!.innerHTML = `${data.main.temp}º`;
+
                 console.log(document.getElementById("weather")!.innerHTML);
                 
             })
             return document.getElementById("weather")!.innerHTML
         }
-        
+// https://openweathermap.org/weather-conditions MIRAR PARA LOS ICONOS   
         getWeather();
         //return the data to avoid errors with the type
         return data
