@@ -17,7 +17,6 @@ const valorationButton2 = document.querySelector('#button2');
 const valorationButton3 = document.querySelector('#button3');
 //Store the valoration text acces in valorationText variable
 const valorationText = document.querySelector('.valorationText');
-// let weather: string | undefined = document.getElementById("weather")?.innerHTML;
 //Reach the HTML element where the result of the response will be output
 let HTMLResponse = document.querySelector("#output");
 //Declare const reportAcudits as an array of objects following the interface ReportAcudits
@@ -77,14 +76,12 @@ function getDadJoke() {
             // Declare the const response to store the result of getJoke(). Assign data.joke to it
             const response = data.joke;
             //Assign data.joke to HTMLResponse!.innerHTML as a string. Use ! on HTMLResponse to avoid errors with it being possibly null
-            HTMLResponse.innerHTML = `${data.joke}`;
+            HTMLResponse.innerHTML = `${response}`;
             //Removes the .d-none bootstrap class from the buttons, making them display again
             valorationText === null || valorationText === void 0 ? void 0 : valorationText.classList.remove('d-none');
             valorationButton1 === null || valorationButton1 === void 0 ? void 0 : valorationButton1.classList.remove('d-none');
             valorationButton2 === null || valorationButton2 === void 0 ? void 0 : valorationButton2.classList.remove('d-none');
             valorationButton3 === null || valorationButton3 === void 0 ? void 0 : valorationButton3.classList.remove('d-none');
-            //log the result of response
-            console.log(response);
             //return the data to avoid errors with the type
             return data;
         });
@@ -116,14 +113,12 @@ function getChuckNorrisJoke() {
             // Declare the const response to store the result of getChuckNorrisJoke(). Assign data.joke to it
             const response = data.value;
             //Assign data.joke to HTMLResponse!.innerHTML as a string. Use ! on HTMLResponse to avoid errors with it being possibly null
-            HTMLResponse.innerHTML = `${data.value}`;
+            HTMLResponse.innerHTML = `${response}`;
             //Removes the .d-none bootstrap class from the buttons, making them display again
             valorationText === null || valorationText === void 0 ? void 0 : valorationText.classList.remove('d-none');
             valorationButton1 === null || valorationButton1 === void 0 ? void 0 : valorationButton1.classList.remove('d-none');
             valorationButton2 === null || valorationButton2 === void 0 ? void 0 : valorationButton2.classList.remove('d-none');
             valorationButton3 === null || valorationButton3 === void 0 ? void 0 : valorationButton3.classList.remove('d-none');
-            //log the result of response
-            console.log(response);
             //return the data to avoid errors with the type
             return data;
         });
@@ -143,8 +138,8 @@ function getLocation() {
             .then((data) => {
             //Store the data obtained in locationCP
             locationCP.push(data.postal_code, data.city);
-            console.log(locationCP);
-            console.log(locationCP[0].toString());
+            // console.log(locationCP);
+            // console.log(locationCP[0].toString());
             function getWeather() {
                 return __awaiter(this, void 0, void 0, function* () {
                     yield fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${locationCP[0]},es&units=metric&lang=sp&appid=0c8a9f191b124cf45772ce4a41d2ecd0`, {
@@ -154,11 +149,11 @@ function getLocation() {
                         .then((data) => {
                         //ICON
                         iconCode = data.weather[0].icon;
-                        console.log(iconCode);
+                        // console.log(iconCode);
                         const icon = document.getElementById('icon');
                         icon.setAttribute('src', `http://openweathermap.org/img/wn/${iconCode}.png`);
                         document.getElementById("temperature").innerHTML = `${data.main.temp}º`;
-                        console.log(document.getElementById("weather").innerHTML);
+                        // console.log(document.getElementById("weather")!.innerHTML);
                     });
                     return document.getElementById("weather").innerHTML;
                 });
@@ -175,15 +170,17 @@ function getLocation() {
 //Call the function to execute it on init
 getLocation();
 function getJoke() {
+    //Obtains a random number from 0 to 1
     const random = Math.random();
+    //Use the random number generated to choose between two diferent APIs to obtain diferent kind of jokes randomly
     if (random <= 0.5) {
         getDadJoke();
-        console.log(random);
+        // console.log(random);
         return "dadJoke";
     }
     else {
         getChuckNorrisJoke();
-        console.log(random);
+        // console.log(random);
         return "chuckNorrisJoke";
     }
 }

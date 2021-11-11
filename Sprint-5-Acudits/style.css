@@ -18,7 +18,7 @@ body{
     width: 80vw;
 }
 .joke-container {
-    background-image: url(./assets/svg.svg);
+    background-image: url(./assets/blob.svg);
     background-size: 100% 100%;
     /* background-position: 50% 50%; */
     max-width: 700px; 
